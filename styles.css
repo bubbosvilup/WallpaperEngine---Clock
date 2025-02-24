@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0, 0, 0);
+}
+
+#container {
+  border: 5px solid rgb(255, 255, 255);
+  height: 800px;
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+p {
+  color: white;
+  margin: 0;
+  font-size: 05rem;
+}
+
+#time {
+  color: white;
+  font-size: 10rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+#seconds {
+  color: white;
+  font-size: 05rem;
+  margin: 0;
+}
+
+#container2 {
+  border: 2px solid rgb(255, 255, 255);
+  height: 750px;
+  width: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
