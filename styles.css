@@ -11,10 +11,10 @@ body {
 }
 
 #menuButton {
-  position: absolute;
-  top: 27%;
-  right: 17%;
-  font-size: 2rem;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.8rem;
   cursor: pointer;
   color: white;
   transition: transform 0.2s ease;
@@ -26,15 +26,16 @@ body {
 
 #settingsMenu {
   position: absolute;
-  top: 29.5%;
-  right: 4%;
+  bottom: 70px;
+  right: 20px;
   background-color: rgba(40, 40, 40, 0.9);
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   display: none;
   flex-direction: column;
   gap: 10px;
+  z-index: 10;
 }
 
 #settingsMenu h3 {
@@ -111,6 +112,7 @@ p {
 }
 
 #container2 {
+  position: relative;
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   height: 750px;
@@ -120,4 +122,10 @@ p {
   align-items: center;
   flex-direction: column;
   background: rgba(30, 30, 30, 0.5);
+}
+
+@media screen and (min-aspect-ratio: 16/9) {
+  #menuButton {
+    right: 8vw;
+  }
 }
