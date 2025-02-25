@@ -4,6 +4,7 @@ const amPmText = document.getElementById("amPm");
 const dateText = document.getElementById("date");
 const menuButton = document.getElementById("menuButton");
 const settingsMenu = document.getElementById("settingsMenu");
+const blurOverlay = document.getElementById("blurOverlay");
 
 function getTime() {
   const now = new Date();
@@ -26,6 +27,15 @@ function getTime() {
 menuButton.addEventListener("click", () => {
   settingsMenu.classList.toggle("visible");
   settingsMenu.classList.toggle("hidden");
+  blurOverlay.classList.toggle("visible");
+});
+
+const closeMenuButton = document.getElementById("closeMenuButton");
+
+closeMenuButton.addEventListener("click", () => {
+  settingsMenu.classList.remove("visible");
+  settingsMenu.classList.add("hidden");
+  blurOverlay.classList.remove("visible");
 });
 
 setInterval(getTime, 999);
