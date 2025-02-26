@@ -1,4 +1,3 @@
-/* Reset di base e stile generale del body */
 body {
   margin: 0;
   padding: 0;
@@ -11,7 +10,6 @@ body {
   background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #262626);
 }
 
-/* Pulsante Menu */
 #menuButton {
   position: fixed;
   top: 1%;
@@ -26,7 +24,6 @@ body {
   transform: rotate(90deg);
 }
 
-/* Menu Impostazioni */
 #settingsMenu {
   position: fixed;
   top: 50%;
@@ -64,7 +61,6 @@ body {
   background-color: #b3621d;
 }
 
-/* Bottone di chiusura */
 #closeMenuButton {
   margin-top: 20px;
   background-color: #b32d27;
@@ -82,7 +78,6 @@ body {
   transform: scale(1.05);
 }
 
-/* Gestione della visibilità */
 #settingsMenu.hidden {
   display: none;
 }
@@ -91,7 +86,6 @@ body {
   display: flex;
 }
 
-/* Contenitore principale dell'orologio */
 #container {
   border: 5px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
@@ -106,7 +100,6 @@ body {
   background: rgba(20, 20, 20, 0.5);
 }
 
-/* Elementi di testo dell'orologio */
 p {
   color: #ffffff;
   margin: 0;
@@ -217,7 +210,6 @@ body.blurred {
   width: 300px;
 }
 
-/* Griglia di gioco */
 #wordleGrid {
   display: grid;
   grid-template-columns: repeat(5, 50px);
@@ -238,20 +230,18 @@ body.blurred {
   text-transform: uppercase;
 }
 
-/* Feedback lettere */
 .correct {
-  background-color: #538d4e; /* Verde */
+  background-color: #538d4e;
 }
 
 .misplaced {
-  background-color: #b59f3b; /* Giallo */
+  background-color: #b59f3b;
 }
 
 .wrong {
-  background-color: #3a3a3c; /* Grigio */
+  background-color: #3a3a3c;
 }
 
-/* Bottone di chiusura del minigioco */
 #closeWordleButton {
   margin-top: 10px;
   background-color: #b32d27;
@@ -291,4 +281,108 @@ body.blurred {
 #gameMessage.show {
   display: block;
   opacity: 1;
+}
+
+#wordleInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#virtualKeyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.keyboard-key {
+  min-width: 30px;
+  height: 40px;
+  background-color: #565758;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.keyboard-key:hover {
+  background-color: #6e7072;
+  transform: scale(1.05);
+}
+
+.keyboard-key:active {
+  background-color: #818386;
+  transform: scale(0.95);
+}
+
+.enter-key {
+  min-width: 80px;
+  background-color: #538d4e;
+  opacity: 0.5;
+}
+
+.enter-key:hover {
+  background-color: #67a35f;
+}
+
+.enter-active {
+  opacity: 1;
+}
+
+#wordleGame {
+  width: 350px; /* Aumentato per accomodare la tastiera */
+}
+
+/* Rendi le celle più piccole per dispositivi mobili */
+@media (max-width: 480px) {
+  .wordle-cell {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  #wordleGrid {
+    grid-template-columns: repeat(5, 40px);
+  }
+
+  .keyboard-key {
+    min-width: 25px;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  #wordleGame {
+    padding: 20px;
+    width: 300px;
+  }
+}
+
+.key-correct {
+  background-color: #538d4e !important;
+  color: white !important;
+}
+
+.key-misplaced {
+  background-color: #b59f3b !important;
+  color: white !important;
+}
+
+.key-wrong {
+  background-color: #3a3a3c !important;
+  color: rgba(255, 255, 255, 0.5) !important;
 }
