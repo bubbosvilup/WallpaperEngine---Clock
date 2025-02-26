@@ -68,14 +68,11 @@ function triggerConfetti() {
 }
 
 const secretWords = [
-  // Parole originali
   "apple",
   "dream",
   "light",
   "brave",
   "stone",
-
-  // Oggetti quotidiani
   "chair",
   "table",
   "phone",
@@ -86,8 +83,6 @@ const secretWords = [
   "spoon",
   "forge",
   "shelf",
-
-  // Natura
   "beach",
   "ocean",
   "cloud",
@@ -98,8 +93,6 @@ const secretWords = [
   "storm",
   "woods",
   "grass",
-
-  // Emozioni e stati
   "happy",
   "angry",
   "peace",
@@ -110,8 +103,6 @@ const secretWords = [
   "tired",
   "relax",
   "focus",
-
-  // Cibo e bevande
   "pizza",
   "pasta",
   "bread",
@@ -122,8 +113,6 @@ const secretWords = [
   "wine",
   "salad",
   "fruit",
-
-  // Parole varie
   "music",
   "dance",
   "paint",
@@ -149,7 +138,6 @@ const secretWords = [
 let secretWord = secretWords[Math.floor(Math.random() * secretWords.length)];
 let currentGuess = "";
 let attempts = 0;
-// Tracciamento dello stato delle lettere
 let letterStates = {};
 
 function openWordleGame() {
@@ -172,7 +160,7 @@ function resetGame() {
   wordleGrid.innerHTML = "";
   attempts = 0;
   currentGuess = "";
-  letterStates = {}; // Resetta lo stato delle lettere
+  letterStates = {};
   secretWord = secretWords[Math.floor(Math.random() * secretWords.length)];
   createNewRow();
 }
@@ -193,17 +181,13 @@ function checkGuess(guess) {
     attempts * 5 + 5
   );
 
-  // Prima passiamo attraverso tutte le lettere corrette e al posto sbagliato
-  // per stabilire il loro stato
   const letterCounts = {};
   for (let i = 0; i < secretWord.length; i++) {
     letterCounts[secretWord[i]] = (letterCounts[secretWord[i]] || 0) + 1;
   }
 
-  // Array per tracciare quali lettere sono già contrassegnate
   let markedCorrect = new Array(5).fill(false);
 
-  // Prima pass: segna solo le lettere corrette
   for (let i = 0; i < 5; i++) {
     const letter = guess[i];
     if (letter === secretWord[i]) {
@@ -211,31 +195,25 @@ function checkGuess(guess) {
       markedCorrect[i] = true;
       letterCounts[letter]--;
 
-      // Aggiorna lo stato della lettera (corretto ha priorità più alta)
       letterStates[letter] = "correct";
     }
   }
 
-  // Seconda pass: segna le lettere al posto sbagliato o assenti
   for (let i = 0; i < 5; i++) {
     if (markedCorrect[i]) continue;
 
     const letter = guess[i];
 
     if (letterCounts[letter] > 0) {
-      // Lettera presente ma nel posto sbagliato
       cells[i].classList.add("misplaced");
       letterCounts[letter]--;
 
-      // Aggiorna lo stato della lettera solo se non è già marcata come corretta
       if (letterStates[letter] !== "correct") {
         letterStates[letter] = "misplaced";
       }
     } else {
-      // Lettera non presente o tutte le occorrenze già contate
       cells[i].classList.add("wrong");
 
-      // Aggiorna lo stato della lettera solo se non è già stato definito
       if (!letterStates[letter]) {
         letterStates[letter] = "wrong";
       }
@@ -244,14 +222,13 @@ function checkGuess(guess) {
     cells[i].textContent = letter;
   }
 
-  // Aggiorna la tastiera virtuale
   updateKeyboardColors();
 
   if (guess === secretWord) {
-    showGameMessage("🎉 Hai vinto! 🎉", true);
+    showGameMessage("🎉 You won! 🎉", true);
     setTimeout(closeWordleGame, 3500);
   } else if (++attempts === 6) {
-    showGameMessage(`❌ Hai perso! La parola era: ${secretWord}`, false);
+    showGameMessage(`❌ You lost! the word was: ${secretWord}`, false);
     setTimeout(closeWordleGame, 3500);
   } else {
     createNewRow();
@@ -260,16 +237,16 @@ function checkGuess(guess) {
 }
 
 function updateKeyboardColors() {
-  // Aggiorna il colore dei tasti in base agli stati delle lettere
+  // update the color of keys
   const keys = document.querySelectorAll(".keyboard-key:not(.enter-key)");
   keys.forEach((key) => {
     const letter = key.textContent.toLowerCase();
-    if (letter === "⌫") return; // Salta il tasto backspace
+    if (letter === "⌫") return;
 
-    // Rimuovi classi esistenti
+    //remove classes
     key.classList.remove("key-correct", "key-misplaced", "key-wrong");
 
-    // Aggiungi classe in base allo stato
+    // class based on status
     if (letterStates[letter] === "correct") {
       key.classList.add("key-correct");
     } else if (letterStates[letter] === "misplaced") {
@@ -281,7 +258,6 @@ function updateKeyboardColors() {
 }
 
 function createVirtualKeyboard() {
-  // Rimuovi tastiera esistente se presente
   const existingKeyboard = document.getElementById("virtualKeyboard");
   if (existingKeyboard) {
     existingKeyboard.remove();
@@ -290,7 +266,7 @@ function createVirtualKeyboard() {
   const keyboard = document.createElement("div");
   keyboard.id = "virtualKeyboard";
 
-  // Layout tastiera QWERTY
+  // qwerty
   const rows = [
     ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
     ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -306,7 +282,7 @@ function createVirtualKeyboard() {
       keyButton.classList.add("keyboard-key");
       keyButton.textContent = key.toUpperCase();
 
-      // Applica lo stato precedentemente salvato, se esiste
+      // delete status prev
       if (key !== "⌫" && letterStates[key]) {
         keyButton.classList.add(`key-${letterStates[key]}`);
       }
@@ -324,7 +300,7 @@ function createVirtualKeyboard() {
 
         updateCurrentRow();
 
-        // Controlla se la parola è completa
+        // this check right word
         if (currentGuess.length === 5) {
           const enterButton = document.getElementById("enterButton");
           enterButton.classList.add("enter-active");
